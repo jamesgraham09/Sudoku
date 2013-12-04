@@ -3,6 +3,11 @@ class Cell
 
   attr_accessor :value
 	attr_reader :cell_ref
+
+  # locations of squares in box relative to first square
+  BOX_SHAPE = [0,1,2,9,10,11,18,19,20]
+
+
   
 
       def initialize(value,cell_ref)
@@ -32,11 +37,33 @@ class Cell
           self.value = values[0]
         end
       end
+  
+      #   relevant_cells = horizontal_ref + vertical_ref + box_ref
+      #   poss = Grid.new.index_to_value(relevant_cells.uniq)
+
+      #   cell = poss.first if poss.count == 1
+      #   cell
+      # end
+
 
       def horizontal_ref
-        start = (self.row) * 9
-        Array.new(9){|i| start + i}
-        # horizontals.each { |@cells| @cells[horizontals]}    
+        cell_zero = (self.row) * 9
+        Array.new(9){|i| cell_zero + i}
+      end
+
+      def vertical_ref
+        cell_zero = (self.col)
+        Array.new(9){|i| cell_zero + i*9}
+      end      
+
+
+      # def box_ref
+      #   (0..80).to_a.select {|i| i if Cell.new(0, i).box == self.box}
+      # end      
+
+      def box_ref
+        cell_zero = ((self.box / 3) * 27 + (self.box % 3) * 3) # convert to something
+        BOX_SHAPE.map {|i| cell_zero + i}
       end
 
 end

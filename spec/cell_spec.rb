@@ -17,6 +17,17 @@ describe Cell do
     	expect(cell.horizontal_ref).to eq((27..35).to_a)
     end
  
+
+    it "can understand which vertical cells to reference" do
+    	cell = Cell.new(0,29)
+    	expect(cell.vertical_ref).to eq([2,11,20,29,38,47,56,65,74])
+    end
+
+    it "can understand which box to reference" do
+    	cell = Cell.new(0,29) ; expect(cell.box_ref).to eq([27,28,29,36,37,38,45,46,47])
+    	cell = Cell.new(0,33) ; expect(cell.box_ref).to eq([33,34,35,42,43,44,51,52,53])
+    end
+
     it "should have a correct box id" do
     	cell = Cell.new(0,29); expect(cell.box).to eq(3)
         cell = Cell.new(0,2); expect(cell.box).to eq(0)

@@ -16,11 +16,11 @@ class Grid
 	def cell_ref
 	end
 
-	def get_neighbours(index_refs)
-		return_array = []
-		index_refs.each {|i| return_array << @cells[i]}
-		return_array
-	end	
+	def index_to_value(index_refs)
+		index_refs.map {|i| @cells[i]}
+	end
+
+	
 
 end
 	

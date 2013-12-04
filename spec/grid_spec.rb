@@ -18,7 +18,7 @@ describe Grid do
         end
 
         it 'can return a value based an index reference' do
-            expect(grid.get_neighbours([2,3,4])).to eq(['5','0','0'])
+            expect(grid.index_to_value([2,3,4])).to eq(['5','0','0'])
         end
     end
 end
