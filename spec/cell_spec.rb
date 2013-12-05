@@ -17,7 +17,6 @@ describe Cell do
     	expect(cell.horizontal_ref).to eq((27..35).to_a)
     end
  
-
     it "can understand which vertical cells to reference" do
     	cell = Cell.new(0,29)
     	expect(cell.vertical_ref).to eq([2,11,20,29,38,47,56,65,74])
@@ -40,4 +39,8 @@ describe Cell do
     	expect(cell.value).to eq(5)
     end
 
+    it 'can find all relevant cells based on a grid reference' do
+        cell = Cell.new(0,29)
+        expect(cell.relevant_cells).to eq([2,11,20,29,38,47,56,65,74,27,28,30,31,32,33,34,35,36,37,45,46].sort) 
+    end
 end

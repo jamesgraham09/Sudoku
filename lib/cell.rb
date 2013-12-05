@@ -6,8 +6,6 @@ class Cell
 
   # locations of squares in box relative to first square
   BOX_SHAPE = [0,1,2,9,10,11,18,19,20]
-
-
   
 
       def initialize(value,cell_ref)
@@ -30,20 +28,18 @@ class Cell
       def possible_values(neighbours)
         (1..9).to_a - neighbours
       end
-
+  
       def solve(neighbours)
         values = possible_values(neighbours)
         if values.length == 1
-          self.value = values[0]
+          self.value = values.first
         end
       end
-  
-      #   relevant_cells = horizontal_ref + vertical_ref + box_ref
-      #   poss = Grid.new.index_to_value(relevant_cells.uniq)
 
-      #   cell = poss.first if poss.count == 1
-      #   cell
-      # end
+      def relevant_cells
+        full_set = horizontal_ref + vertical_ref + box_ref
+        full_set.uniq.sort
+      end
 
 
       def horizontal_ref
@@ -66,14 +62,15 @@ class Cell
         BOX_SHAPE.map {|i| cell_zero + i}
       end
 
+    
+
+
 end
 
 # cell = Cell.new(6,9)
 # puts cell.inspect
 # puts cell.row_id
 # puts cell.col_id
-
-
 
 
 

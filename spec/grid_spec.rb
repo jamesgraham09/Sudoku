@@ -20,6 +20,39 @@ describe Grid do
         it 'can return a value based an index reference' do
             expect(grid.index_to_value([2,3,4])).to eq(['5','0','0'])
         end
+
+        # it "can convert a point in the grid into valid cell form" do
+        #     TBD
+        # end
+
+        # it 'can pick out relevant values for a given point' do
+        #     expect(grid.cells.first.neighbours).to include?(6)
+        # end
+
+        it "should be able to return a list of cell objects" do
+            expect(grid.cell_objects.first.value).to eq("0")
+        end
+
+        it "should be able to compile a list of indexes which need to be solved" do
+            expect(grid.cells_to_be_solved.count).to eq(41)
+        end
+
+        it "should be able to gather a list of relevant cells for the first cell to be solved" do
+            expect(grid.cells_to_be_solved.first.relevant_cells).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18, 19, 20, 27, 36, 45, 54, 63, 72])
+        end
+
+        it "should be able to gather a list of comparitor values of the first cell" do
+        expect(grid.values_of_relevant_cells.first).to eq(["0", "1", "2", "3", "4", "5", "7", "8", "9"]) 
+        end
+
+        it "should be able to return the missings value for relevant_cells" do 
+            expect(grid.missing_values).to eq([6])
+        end
+
+
+        # xit "should be able to return a solved puzzle with a unsolved sudoku" do
+        #     expect(grid.solved.first).to eq(6)
+        # end
     end
 end
 
