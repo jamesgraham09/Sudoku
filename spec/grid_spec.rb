@@ -2,7 +2,7 @@ require_relative '../lib/grid.rb'
 
 describe Grid do
     context "initialization" do
-        let(:puzzle) { '015003002000100906270068430490002017501040380003905000900081040860070025037204600' }
+        let(:puzzle) { '015003002000100906270068430490002017501040380003905000900081040860070025037204600' }               
         let(:grid) { Grid.new(puzzle) }
         
         it 'should have 81 cells' do
@@ -10,15 +10,15 @@ describe Grid do
         end
         
         it 'should have an unsolved first cell' do
-            expect(grid.cells[0]).to eq('0')
+            expect(grid.cells[0]).to eq(0)
         end
         
         it 'should have a solved second cell with value 1' do
-            expect(grid.cells[1]).to eq('1')
+            expect(grid.cells[1]).to eq(1)
         end
 
         it 'can return a value based an index reference' do
-            expect(grid.index_to_value([2,3,4])).to eq(['5','0','0'])
+            expect(grid.index_to_value([2,3,4])).to eq([5,0,0])
         end
 
         # it "can convert a point in the grid into valid cell form" do
@@ -30,7 +30,7 @@ describe Grid do
         # end
 
         it "should be able to return a list of cell objects" do
-            expect(grid.cell_objects.first.value).to eq("0")
+            expect(grid.cell_objects.first.value).to eq(0)
         end
 
         it "should be able to compile a list of indexes which need to be solved" do
@@ -42,13 +42,25 @@ describe Grid do
         end
 
         it "should be able to gather a list of comparitor values of the first cell" do
-        expect(grid.values_of_relevant_cells.first).to eq(["0", "1", "2", "3", "4", "5", "7", "8", "9"]) 
+        expect(grid.values_of_relevant_cells.first).to eq([0, 1, 2, 3, 4, 5, 7, 8, 9]) 
         end
 
-        it "should be able to return the missings value for relevant_cells" do 
-            expect(grid.missing_values).to eq([6])
+        it "should be able to return the missings value for the first missing cell" do 
+            expect(grid.missing_values.first).to eq([6])
         end
 
+
+        # random code for experimentation   
+
+        it "should be able to solve a puzzle" do
+            p "Missing values"
+            p grid.missing_values
+            p "sddf"
+            grid.try_to_solve
+            p "cells to be solved"
+            p grid.cells_to_be_solved
+            expect(grid.all_cells_string.join).to eq('615493872348127956279568431496832517521746389783915264952681743864379125137254698')
+        end
 
         # xit "should be able to return a solved puzzle with a unsolved sudoku" do
         #     expect(grid.solved.first).to eq(6)
